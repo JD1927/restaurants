@@ -1,21 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet } from 'react-native';
-
+import Loading from './../../components/Loading';
+import { isUserLogged } from './../../utils/actions';
 import UserGuest from './UserGuest';
 import UserLogged from './UserLogged';
-import { getCurrentUser } from './../../utils/actions';
-import Loading from './../../components/Loading';
+
 
 
 export default function Account() {
   const [login, setLogin] = useState(null);
 
   useEffect(() => {
-    const user = getCurrentUser();
-    setLogin(user ? true : false);
+    setLogin(isUserLogged());
   }, []);
 
-  if (login == null) {
+  if (login === null) {
     return <Loading isVisible={true} text='Loading...'></Loading>
   }
 

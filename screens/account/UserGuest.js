@@ -3,16 +3,19 @@ import { Image, StyleSheet, Text } from 'react-native';
 import { Button } from 'react-native-elements';
 import { ScrollView } from 'react-native-gesture-handler';
 import { ORANGE, ORANGE_80 } from '../../utils/global.colors';
+import { useNavigation } from '@react-navigation/native';
 
 
 export default function UserGuest() {
+  const navigation = useNavigation();
+
   return (
     <ScrollView centerContent style={styles.bodyView}>
       <Image
         source={require('./../../assets/restaurant-logo.png')}
         resizeMode='contain'
-        style={styles.image}
-      ></Image>
+        style={styles.image}>
+      </Image>
       <Text style={styles.title}>Check your profile on Restaurants!</Text>
       <Text style={styles.description}>
         How would you describe your best restaurant? Find and view the best
@@ -22,7 +25,7 @@ export default function UserGuest() {
       <Button 
         buttonStyle={styles.button}
         title='See your profile'
-        onPress={() => console.log('click')}>
+        onPress={() => navigation.navigate('login')}>
       </Button>
     </ScrollView>
   );
@@ -36,7 +39,6 @@ const styles = StyleSheet.create({
     height: 300,
     width: '100%',
     marginBottom: 20,
-    flex: 1,
   },
   title: {
     fontWeight: 'bold',
@@ -51,5 +53,6 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: `${ORANGE}`,
+    borderRadius: 20,
   },
 });

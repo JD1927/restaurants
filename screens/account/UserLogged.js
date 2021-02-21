@@ -1,14 +1,12 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-const Search = () => {
+export default function UserLogged() {
   return (
     <View>
-      <Text>Search</Text>
+      <Text>User Logged...</Text>
     </View>
   );
 }
-
-export default Search;
 
 const styles = StyleSheet.create({});

@@ -1,14 +1,12 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-const Account = () => {
+export default function Search() {
   return (
     <View>
-      <Text>Account</Text>
+      <Text>Search</Text>
     </View>
   );
 }
 
-export default Account;
-
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});

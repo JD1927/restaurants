@@ -1,14 +1,12 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-const Favorites = () => {
+export default function Restaurants() {
   return (
     <View>
-      <Text>Favorites</Text>
+      <Text>Restaurants</Text>
     </View>
   );
 }
-
-export default Favorites;
 
 const styles = StyleSheet.create({});

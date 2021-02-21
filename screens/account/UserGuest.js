@@ -1,0 +1,55 @@
+import React from 'react';
+import { Image, StyleSheet, Text } from 'react-native';
+import { Button } from 'react-native-elements';
+import { ScrollView } from 'react-native-gesture-handler';
+import { ORANGE, ORANGE_80 } from '../../utils/global.colors';
+
+
+export default function UserGuest() {
+  return (
+    <ScrollView centerContent style={styles.bodyView}>
+      <Image
+        source={require('./../../assets/restaurant-logo.png')}
+        resizeMode='contain'
+        style={styles.image}
+      ></Image>
+      <Text style={styles.title}>Check your profile on Restaurants!</Text>
+      <Text style={styles.description}>
+        How would you describe your best restaurant? Find and view the best
+        restaurants in a simple way, vote which one you liked the most and
+        comment on how your experience was.
+      </Text>
+      <Button 
+        buttonStyle={styles.button}
+        title='See your profile'
+        onPress={() => console.log('click')}>
+      </Button>
+    </ScrollView>
+  );
+}
+
+const styles = StyleSheet.create({
+  bodyView: {
+    marginHorizontal: 30,
+  },
+  image: {
+    height: 300,
+    width: '100%',
+    marginBottom: 20,
+    flex: 1,
+  },
+  title: {
+    fontWeight: 'bold',
+    fontSize: 19,
+    marginVertical: 15,
+    textAlign: 'center',
+  },
+  description: {
+    textAlign: 'center',
+    marginBottom: 20,
+    color: `${ORANGE_80}`,
+  },
+  button: {
+    backgroundColor: `${ORANGE}`,
+  },
+});

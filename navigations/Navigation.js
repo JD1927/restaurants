@@ -8,6 +8,7 @@ import AccountStack from './AccountStack';
 import FavoritesStack from './FavoritesStack';
 import TopRestaurantsStack from './TopRestaurantsStack';
 import SearchStack from './SearchStack';
+import { ORANGE, ORANGE_50 } from '../utils/global.colors';
 
 const Tab = createBottomTabNavigator();
 
@@ -49,8 +50,8 @@ export default function Navigation() {
       <Tab.Navigator
         initialRouteName='restaurants'
         tabBarOptions={{
-          inactiveTintColor: '#F4AA90',
-          activeTintColor: '#E95420',
+          inactiveTintColor: `${ORANGE_50}`,
+          activeTintColor: `${ORANGE}`,
         }}
         screenOptions={({route}) => ({
           tabBarIcon: ({ color }) => screenOptions({ route, color })

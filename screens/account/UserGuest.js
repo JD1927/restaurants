@@ -1,7 +1,6 @@
 import React from 'react';
-import { Image, StyleSheet, Text } from 'react-native';
+import { ScrollView, Image, StyleSheet, Text } from 'react-native';
 import { Button } from 'react-native-elements';
-import { ScrollView } from 'react-native-gesture-handler';
 import { ORANGE, ORANGE_80 } from '../../utils/global.colors';
 import { useNavigation } from '@react-navigation/native';
 

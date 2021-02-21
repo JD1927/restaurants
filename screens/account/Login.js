@@ -1,12 +1,56 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Image, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Divider } from 'react-native-elements';
+import { ORANGE } from '../../utils/global.colors';
 
 export default function Login() {
   return (
-    <View>
-      <Text>Login</Text>
-    </View>
+    <ScrollView>
+      <Image
+        source={require('./../../assets/restaurant-logo.png')}
+        resizeMode='contain'
+        style={styles.image}>
+      </Image>
+      <View style={styles.container}>
+        <Text>Sign In</Text>
+        <CreateAccount></CreateAccount>
+      </View>
+      <Divider style={styles.divider}></Divider>
+    </ScrollView>
   );
 }
 
-const styles = StyleSheet.create({});
+function CreateAccount({props}) {
+  return (
+    <Text 
+      onPress={() => console.log('click')}
+      style={styles.question}>
+      Don't you have an account yet?{" "}
+      <Text style={styles.signUp}>Sign up!</Text>
+    </Text>
+  );
+}
+
+const styles = StyleSheet.create({
+  image: {
+    height:150,
+    width: '100%',
+    marginBottom: 20,
+  },
+  container: {
+    marginHorizontal: 40,
+  },
+  divider: {
+    backgroundColor: `${ORANGE}`,
+    margin: 40,
+  },
+  question: {
+    marginTop: 15,
+    marginHorizontal: 10,
+    textAlign: 'center',
+  },
+  signUp: {
+    color: `${ORANGE}`,
+    fontWeight: 'bold',
+  },
+});

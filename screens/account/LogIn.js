@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigation } from '@react-navigation/core';
 import { Image, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Divider } from 'react-native-elements';
 import { ORANGE } from '../../utils/global.colors';
@@ -21,9 +22,10 @@ export default function Login() {
 }
 
 function CreateAccount({props}) {
+  const navigation = useNavigation();
   return (
     <Text 
-      onPress={() => console.log('click')}
+      onPress={() => navigation.navigate('signup')}
       style={styles.question}>
       Don't you have an account yet?{" "}
       <Text style={styles.signUp}>Sign up!</Text>
@@ -48,6 +50,7 @@ const styles = StyleSheet.create({
     marginTop: 15,
     marginHorizontal: 10,
     textAlign: 'center',
+    padding: 10,
   },
   signUp: {
     color: `${ORANGE}`,

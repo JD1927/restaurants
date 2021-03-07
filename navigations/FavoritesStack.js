@@ -10,7 +10,14 @@ export default function FavoritesStack() {
       <Stack.Screen
         name='favorites'
         component={Favorites}
-        options={{ title: 'Favorites' }}>
+        options={
+          {
+            title: 'Favorites',
+            headerTitleStyle: {
+              fontFamily: 'Poppins',
+            },
+          }
+        }>
       </Stack.Screen>
     </Stack.Navigator>
   );

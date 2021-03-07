@@ -1,23 +1,25 @@
-import React from 'react';
 import { useNavigation } from '@react-navigation/core';
-import { Image, ScrollView, StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { Image, StyleSheet, Text, View } from 'react-native';
 import { Divider } from 'react-native-elements';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import SignInForm from '../../components/account/SignInForm';
 import { ORANGE } from '../../utils/global.colors';
 
-export default function Login() {
+export default function SignIn() {
   return (
-    <ScrollView>
+    <KeyboardAwareScrollView>
       <Image
         source={require('./../../assets/restaurant-logo.png')}
         resizeMode='contain'
         style={styles.image}>
       </Image>
       <View style={styles.container}>
-        <Text>Sign In</Text>
+        <SignInForm></SignInForm>
         <CreateAccount></CreateAccount>
       </View>
       <Divider style={styles.divider}></Divider>
-    </ScrollView>
+    </KeyboardAwareScrollView>
   );
 }
 
@@ -40,13 +42,18 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   container: {
-    marginHorizontal: 40,
+    marginHorizontal: 10,
+  },
+  title: {
+    fontFamily: 'Poppins-Bold',
+    marginHorizontal: 20
   },
   divider: {
     backgroundColor: `${ORANGE}`,
     margin: 40,
   },
   question: {
+    fontFamily: 'Poppins',
     marginTop: 15,
     marginHorizontal: 10,
     textAlign: 'center',

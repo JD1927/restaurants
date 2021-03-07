@@ -10,7 +10,14 @@ export default function TopRestaurantsStack() {
       <Stack.Screen
         name='top-restaurants'
         component={TopRestaurants}
-        options={{ title: 'Top 5 Restaurants' }}>
+        options={
+          { 
+            title: 'Top 5 Restaurants',
+            headerTitleStyle: {
+              fontFamily: 'Poppins',
+            },
+          }
+        }>
       </Stack.Screen>
     </Stack.Navigator>
   );

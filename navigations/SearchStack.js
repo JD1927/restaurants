@@ -10,7 +10,14 @@ export default function SearchStack() {
       <Stack.Screen
         name='search'
         component={Search}
-        options={{ title: 'Search' }}>
+        options={
+          { 
+            title: 'Search',
+            headerTitleStyle: {
+              fontFamily: 'Poppins',
+            },
+          }
+        }>
       </Stack.Screen>
     </Stack.Navigator>
   );

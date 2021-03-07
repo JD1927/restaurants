@@ -24,7 +24,8 @@ export default function UserGuest() {
       <Button 
         buttonStyle={styles.button}
         title='See your profile'
-        onPress={() => navigation.navigate('login')}>
+        titleStyle={styles.buttonText}
+        onPress={() => navigation.navigate('signin')}>
       </Button>
     </ScrollView>
   );
@@ -40,18 +41,23 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   title: {
-    fontWeight: 'bold',
+    fontFamily: 'Poppins-Bold',
     fontSize: 19,
     marginVertical: 15,
     textAlign: 'center',
   },
   description: {
+    fontFamily: 'Poppins',
     textAlign: 'center',
     marginBottom: 20,
     color: `${ORANGE_80}`,
   },
   button: {
+    fontFamily: 'Poppins-Bold',
     backgroundColor: `${ORANGE}`,
     borderRadius: 20,
   },
+  buttonText: {
+    fontFamily: 'Poppins'
+  }
 });

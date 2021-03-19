@@ -23,7 +23,7 @@ export const signUpWithEmailAndPassword = async ({email, password}) => {
     await firebase.auth().createUserWithEmailAndPassword(email, password);
   } catch (error) {
     result.status = false;
-    result.error = 'This email is already registered.'
+    result.error = 'This email is already registered.';
   }
   return result;
 };
@@ -34,7 +34,7 @@ export const signInWithEmailAndPassword = async ({email, password}) => {
     await firebase.auth().signInWithEmailAndPassword(email, password);
   } catch (error) {
     result.status = false;
-    result.error = 'Incorrect email or password.'
+    result.error = 'Incorrect email or password.';
   }
   return result;
 };

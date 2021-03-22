@@ -1,8 +1,9 @@
 import { useNavigation } from '@react-navigation/core';
-import React, { useRef, useState, useEffect } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useEffect, useRef, useState } from 'react';
+import { StyleSheet, View } from 'react-native';
 import Toast from 'react-native-easy-toast';
 import { Button } from 'react-native-elements';
+import AccountOptions from '../../components/account/AccountOptions';
 import UserInfo from '../../components/account/UserInfo';
 import Loading from '../../components/Loading';
 import { getCurrentUser, signOut } from '../../utils/actions';
@@ -15,10 +16,12 @@ export default function UserLogged() {
   const [loading, setLoading] = useState(false);
   const [loadingText, setLoadingText] = useState('');
   const [user, setUser] = useState(undefined);
+  const [reloadUser, setReloadUser] = useState(false);
 
   useEffect(() => {
     setUser(getCurrentUser());
-  }, []);
+    setReloadUser(false);
+  }, [reloadUser]);
 
   return (
     <View style={styles.container}>
@@ -30,7 +33,11 @@ export default function UserLogged() {
               setLoading={setLoading}
               setLoadingText={setLoadingText}
             />
-            <Text>Account Settings...</Text>
+            <AccountOptions 
+              user={user}
+              toast={toast}
+              setReloadUser={setReloadUser}
+            />
           </View>
       }
       <Button
@@ -56,6 +63,7 @@ const styles = StyleSheet.create({
     color: `${ORANGE_80}`,
   },
   btnSignOut: {
+    marginTop: 20,
     backgroundColor: `#FFFFFF`,
     borderRadius: 20,
     marginHorizontal: 20,

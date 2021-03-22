@@ -59,10 +59,44 @@ export const uploadImage = async ({ image, path, name }) => {
   return result;
 };
 
-export const updateProfilePicture = async ({ data }) => {
+export const updateProfile = async ({ data }) => {
   const result = { status: true, error: undefined, url: undefined };
   try {
     await firebase.auth().currentUser.updateProfile({ ...data});
+  } catch (error) {
+    result.status = false;
+    result.error = error;
+  }
+  return result;
+};
+
+export const refreshAuthentication = async (password) => {
+  const result = { status: true, error: undefined };
+  const user = getCurrentUser();
+  const credentials = firebase.auth.EmailAuthProvider.credential(user.email, password);
+  try {
+    await user.reauthenticateWithCredential(credentials);
+  } catch (error) {
+    result.status = false;
+    result.error = error;
+  }
+  return result;
+};
+
+export const updateEmail = async (email) => {
+  const result = { status: true, error: undefined };
+  try {
+    await firebase.auth().currentUser.updateEmail(email);
+  } catch (error) {
+    result.status = false;
+    result.error = error;
+  }
+  return result;
+};
+export const updatePassword = async (password) => {
+  const result = { status: true, error: undefined };
+  try {
+    await firebase.auth().currentUser.updatePassword(password);
   } catch (error) {
     result.status = false;
     result.error = error;

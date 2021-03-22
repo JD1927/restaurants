@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Alert } from 'react-native';
 import { StyleSheet, Text, View } from 'react-native';
 import { Avatar } from 'react-native-elements';
-import { updateProfilePicture, uploadImage } from '../../utils/actions';
+import { updateEmail, uploadImage } from '../../utils/actions';
 import { getImageFromGallery } from '../../utils/helpers';
 
 export default function UserInfo({user, setLoading, setLoadingText}) {
@@ -24,7 +24,7 @@ export default function UserInfo({user, setLoading, setLoadingText}) {
       Alert.alert('Something went wrong by uploading the avatar profile');
       return;
     }
-    const hasUpdatedProfile = await updateProfilePicture(
+    const hasUpdatedProfile = await updateEmail(
       { data: { photoURL: isUploaded.url },}
     );
     setLoading(false);

@@ -8,7 +8,7 @@ export default function Modal({ isVisible, setVisible, children}) {
       overlayStyle={styles.overlay}
       isVisible={isVisible}
       onBackdropPress={() => setVisible(false)}>
-      { children ? children : ''  }
+      { children }
     </Overlay>
   );
 }
@@ -17,4 +17,4 @@ const styles = StyleSheet.create({
   overlay: {
     width: '90%'
   }
-})
+});

@@ -64,8 +64,8 @@ const styles = StyleSheet.create({
   },
   btnSignOut: {
     marginTop: 20,
-    backgroundColor: `#FFFFFF`,
     borderRadius: 20,
+    backgroundColor: `transparent`,
     marginHorizontal: 20,
     borderColor: `${ORANGE}`,
     borderWidth: 1,

@@ -98,7 +98,7 @@ export default function AccountOptions({ user, toast, setReloadUser }) {
 
             </Icon>
             <ListItem.Content>
-              <ListItem.Title>{option.title}</ListItem.Title>
+              <ListItem.Title style={styles.itemTitle}>{option.title}</ListItem.Title>
             </ListItem.Content>
             <Icon
               color={option.iconColorRight}
@@ -121,5 +121,8 @@ const styles = StyleSheet.create({
   item: {
     borderBottomWidth: 1,
     borderBottomColor: `${ORANGE}`,
+  },
+  itemTitle: {
+    fontFamily: 'Poppins',
   }
 });

@@ -48,7 +48,8 @@ export default function UpdateFullNameForm({ name, setShowModal, toast, setReloa
     <View style={styles.form}>
       <Input 
         placeholder='Enter your full name'
-        containerStyle={styles.input}
+        containerStyle={styles.inputContainer}
+        style={styles.input}
         defaultValue={name}
         onChange={(e) => setNewName(e.nativeEvent.text)}
         errorMessage={error}
@@ -61,9 +62,10 @@ export default function UpdateFullNameForm({ name, setShowModal, toast, setReloa
         }
       />
       <Button
-        title='Update full name'
+        title='UPDATE'
         containerStyle={styles.btnContainter}
         buttonStyle={styles.button}
+        titleStyle={styles.buttonText}
         onPress={onSubmit}
         loading={loading}
       />
@@ -76,14 +78,23 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 10
   },
-  input: {
+  inputContainer: {
     marginBottom: 15,
   },
   btnContainter: {
     width: '95%'
   },
   button: {
+    fontFamily: 'Poppins',
     backgroundColor: `${ORANGE}`,
     borderRadius: 20,
-  }
+  },
+  buttonText: {
+    fontFamily: 'Poppins',
+  },
+  input: {
+    fontFamily: 'Poppins',
+    fontSize: 16,
+    width: '100%',
+  },
 })

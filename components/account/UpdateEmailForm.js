@@ -66,7 +66,8 @@ export default function UpdateEmailForm({ email, setShowModal, toast, setReloadU
     <View style={styles.form}>
       <Input 
         placeholder='Enter your new email'
-        containerStyle={styles.input}
+        containerStyle={styles.inputContainer}
+        style={styles.input}
         defaultValue={email}
         keyboardType='email-address'
         onChange={(e) => setNewEmail(e.nativeEvent.text)}
@@ -81,7 +82,8 @@ export default function UpdateEmailForm({ email, setShowModal, toast, setReloadU
       />
       <Input 
         placeholder='Enter your password'
-        containerStyle={styles.input}
+        containerStyle={styles.inputContainer}
+        style={styles.input}
         defaultValue={password}
         onChange={(e) => setPassword(e.nativeEvent.text)}
         errorMessage={passwordError}
@@ -97,9 +99,10 @@ export default function UpdateEmailForm({ email, setShowModal, toast, setReloadU
         }
       />
       <Button
-        title='Update Email'
+        title='UPDATE'
         containerStyle={styles.btnContainter}
         buttonStyle={styles.button}
+        titleStyle={styles.buttonText}
         onPress={onSubmit}
         loading={loading}
       />
@@ -112,7 +115,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 10
   },
-  input: {
+  inputContainer: {
     marginBottom: 15,
   },
   btnContainter: {
@@ -121,5 +124,13 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: `${ORANGE}`,
     borderRadius: 20,
-  }
+  },
+  buttonText: {
+    fontFamily: 'Poppins',
+  },
+  input: {
+    fontFamily: 'Poppins',
+    fontSize: 16,
+    width: '100%',
+  },
 })

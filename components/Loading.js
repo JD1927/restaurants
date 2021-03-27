@@ -38,5 +38,6 @@ const styles = StyleSheet.create({
   text: {
     color: `${ORANGE}`,
     marginTop: 10,
+    fontFamily: 'Poppins-Light'
   },
 });

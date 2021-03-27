@@ -78,7 +78,8 @@ export default function UpdatePasswordForm({ setShowModal, toast }) {
     <View style={styles.form}>
       <Input 
         placeholder='Enter your current password'
-        containerStyle={styles.input}
+        containerStyle={styles.inputContainer}
+        style={styles.input}
         defaultValue={currentPassword}
         onChange={(e) => setCurrentPassword(e.nativeEvent.text)}
         errorMessage={currentPasswordError}
@@ -95,7 +96,8 @@ export default function UpdatePasswordForm({ setShowModal, toast }) {
       />
       <Input 
         placeholder='Enter your new password'
-        containerStyle={styles.input}
+        containerStyle={styles.inputContainer}
+        style={styles.input}
         defaultValue={newPassword}
         onChange={(e) => setNewPassword(e.nativeEvent.text)}
         errorMessage={newPasswordError}
@@ -112,7 +114,8 @@ export default function UpdatePasswordForm({ setShowModal, toast }) {
       />
       <Input 
         placeholder='Enter your confirm password'
-        containerStyle={styles.input}
+        containerStyle={styles.inputContainer}
+        style={styles.input}
         defaultValue={confirmPassword}
         onChange={(e) => setConfirmPassword(e.nativeEvent.text)}
         errorMessage={confirmPasswordError}
@@ -128,9 +131,10 @@ export default function UpdatePasswordForm({ setShowModal, toast }) {
         }
       />
       <Button
-        title='Update Password'
+        title='UPDATE'
         containerStyle={styles.btnContainter}
         buttonStyle={styles.button}
+        titleStyle={styles.buttonText}
         onPress={onSubmit}
         loading={loading}
       />
@@ -143,14 +147,23 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 10
   },
-  input: {
+  inputContainer: {
     marginBottom: 15,
   },
   btnContainter: {
     width: '95%'
   },
   button: {
+    fontFamily: 'Poppins',
     backgroundColor: `${ORANGE}`,
     borderRadius: 20,
-  }
+  },
+  buttonText: {
+    fontFamily: 'Poppins',
+  },
+  input: {
+    fontFamily: 'Poppins',
+    fontSize: 16,
+    width: '100%',
+  },
 });

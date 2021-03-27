@@ -71,7 +71,7 @@ export default function SignUpForm() {
         keyboardType='email-address'
         placeholder='Enter your email...'
         containerStyle={styles.input}
-        style={styles.textForm}
+        style={styles.buttonText}
         onChange={(e) => onValueChanges(e, 'email')}
         errorMessage={errorEmail}
         defaultValue={formData.email}>
@@ -84,7 +84,7 @@ export default function SignUpForm() {
         errorMessage={errorPassword}
         defaultValue={formData.password}
         containerStyle={styles.input}
-        style={styles.textForm}
+        style={styles.buttonText}
         rightIcon={
           <Icon
             type='material-community'
@@ -102,7 +102,7 @@ export default function SignUpForm() {
         errorMessage={errorConfirm}
         defaultValue={formData.confirm}
         containerStyle={styles.input}
-        style={styles.textForm}
+        style={styles.buttonText}
         rightIcon={
           <Icon
             type='material-community'
@@ -116,7 +116,7 @@ export default function SignUpForm() {
         title='REGISTER'
         containerStyle={styles.btnContainer}
         buttonStyle={styles.button}
-        titleStyle={styles.textForm}
+        titleStyle={styles.buttonText}
         onPress={() => signUpUser()}>
       </Button>
     </View>
@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     width: '100%',
   },
-  textForm: {
+  buttonText: {
     fontFamily: 'Poppins',
   },
   btnContainer: {
@@ -142,7 +142,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center'
   },
   button: {
-    fontFamily: 'Poppins',
     backgroundColor: `${ORANGE}`,
     borderRadius: 20,
   },

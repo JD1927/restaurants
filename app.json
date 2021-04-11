@@ -17,12 +17,19 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.jd1927.restaurants"
     },
     "android": {
+      "package": "com.jd1927.restaurants",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
+      },
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyCxWzCzmQmm1QHv7_KzxA_QO6S4NUskOlM"
+        }
       },
       "permissions": [
         "CAMERA_ROLL",
@@ -30,7 +37,8 @@
         "WRITE_EXTERNAL_STORAGE",
         "LOCATION",
         "ACCESS_COARSE_LOCATION",
-        "ACCESS_FINE_LOCATION"
+        "ACCESS_FINE_LOCATION",
+        "MEDIA_LIBRARY"
       ]
     },
     "web": {

@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { Alert } from 'react-native';
-import { StyleSheet, Text, View } from 'react-native';
+import { Alert, StyleSheet, Text, View } from 'react-native';
 import { Avatar } from 'react-native-elements';
-import { updateEmail, uploadImage } from '../../utils/actions';
+import { updateProfile, uploadImage } from '../../utils/actions';
 import { getImageFromGallery } from '../../utils/helpers';
 
 export default function UserInfo({user, setLoading, setLoadingText}) {
@@ -19,12 +18,12 @@ export default function UserInfo({user, setLoading, setLoadingText}) {
       { image: result.image, path: 'avatars', name: `${user.uid}`},
     );
 
-    if (!isUploaded) {
+    if (!isUploaded.status) {
       setLoading(false);
       Alert.alert('Something went wrong by uploading the avatar profile');
       return;
     }
-    const hasUpdatedProfile = await updateEmail(
+    const hasUpdatedProfile = await updateProfile(
       { data: { photoURL: isUploaded.url },}
     );
     setLoading(false);

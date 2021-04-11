@@ -17,7 +17,7 @@ export const getCurrentUser = () => {
   return firebase.auth().currentUser;
 };
 
-export const signUpWithEmailAndPassword = async ({email, password}) => {
+export const signUpWithEmailAndPassword = async ({ email, password }) => {
   const result = { status: true, error: null };
   try {
     await firebase.auth().createUserWithEmailAndPassword(email, password);
@@ -28,7 +28,7 @@ export const signUpWithEmailAndPassword = async ({email, password}) => {
   return result;
 };
 
-export const signInWithEmailAndPassword = async ({email, password}) => {
+export const signInWithEmailAndPassword = async ({ email, password }) => {
   const result = { status: true, error: null };
   try {
     await firebase.auth().signInWithEmailAndPassword(email, password);
@@ -50,7 +50,10 @@ export const uploadImage = async ({ image, path, name }) => {
 
   try {
     await ref.put(blob);
-    const url = await firebase.storage().ref(`${path}/${name}`).getDownloadURL();
+    const url = await firebase
+      .storage()
+      .ref(`${path}/${name}`)
+      .getDownloadURL();
     result.status = true;
     result.url = url;
   } catch (error) {
@@ -62,7 +65,7 @@ export const uploadImage = async ({ image, path, name }) => {
 export const updateProfile = async ({ data }) => {
   const result = { status: true, error: undefined, url: undefined };
   try {
-    await firebase.auth().currentUser.updateProfile({ ...data});
+    await firebase.auth().currentUser.updateProfile({ ...data });
   } catch (error) {
     result.status = false;
     result.error = error;
@@ -73,7 +76,10 @@ export const updateProfile = async ({ data }) => {
 export const refreshAuthentication = async (password) => {
   const result = { status: true, error: undefined };
   const user = getCurrentUser();
-  const credentials = firebase.auth.EmailAuthProvider.credential(user.email, password);
+  const credentials = firebase.auth.EmailAuthProvider.credential(
+    user.email,
+    password
+  );
   try {
     await user.reauthenticateWithCredential(credentials);
   } catch (error) {
@@ -93,10 +99,94 @@ export const updateEmail = async (email) => {
   }
   return result;
 };
+
 export const updatePassword = async (password) => {
   const result = { status: true, error: undefined };
   try {
     await firebase.auth().currentUser.updatePassword(password);
+  } catch (error) {
+    result.status = false;
+    result.error = error;
+  }
+  return result;
+};
+
+export const addDocumentWithoutID = async ({ collection, data }) => {
+  const result = { status: true, error: undefined };
+  try {
+    await db.collection(collection).add(data);
+  } catch (error) {
+    result.status = false;
+    result.error = error;
+  }
+  return result;
+};
+
+export const getRestaurantsByLimit = async (restaurantLimit) => {
+  const result = {
+    status: true,
+    error: undefined,
+    restaurants: [],
+    startRestaurant: undefined,
+  };
+  try {
+    const response = await db
+      .collection('restaurants')
+      .orderBy('createdAt', 'desc')
+      .limit(restaurantLimit)
+      .get();
+
+    if (response.docs.length > 0) {
+      result.startRestaurant = response.docs[response.docs.length - 1];
+    }
+    response.forEach((doc) => {
+      const restaurant = doc.data();
+      restaurant.id = doc.id;
+      result.restaurants.push(restaurant);
+    });
+  } catch (error) {
+    result.status = false;
+    result.error = error;
+  }
+  return result;
+};
+
+export const getMoreRestaurantsByLimit = async (restaurantLimit, startRestaurant) => {
+  const result = {
+    status: true,
+    error: undefined,
+    restaurants: [],
+    startRestaurant: undefined,
+  };
+  try {
+    const response = await db
+      .collection('restaurants')
+      .orderBy('createdAt', 'desc')
+      .startAfter(startRestaurant.data().createdAt)
+      .limit(restaurantLimit)
+      .get();
+
+    if (response.docs.length > 0) {
+      result.startRestaurant = response.docs[response.docs.length - 1];
+    }
+    response.forEach((doc) => {
+      const restaurant = doc.data();
+      restaurant.id = doc.id;
+      result.restaurants.push(restaurant);
+    });
+  } catch (error) {
+    result.status = false;
+    result.error = error;
+  }
+  return result;
+};
+
+export const getDocumentByID = async (collection, id) => {
+  const result = { status: true, error: undefined, doc: undefined };
+  try {
+    const response = await db.collection(collection).doc(id).get();
+    result.doc = response.data();
+    result.doc.id = response.id;
   } catch (error) {
     result.status = false;
     result.error = error;

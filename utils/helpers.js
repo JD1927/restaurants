@@ -11,7 +11,7 @@ export function hasValidEmail(email) {
 export const getImageFromGallery = async ({ size }) => {
   const response = { status: false, image: undefined };
 
-  const hasPermissions = await Permissions.askAsync(Permissions.CAMERA);
+  const hasPermissions = await Permissions.askAsync(Permissions.MEDIA_LIBRARY);
 
   if (hasPermissions.status === 'denied') {
     Alert.alert('You must authorize the camera to get access to the gallery.');
@@ -58,4 +58,8 @@ export const getCurrentLocation = async () => {
   response.status = true;
   response.location = { ...location };
   return response;
+};
+
+export const getPhoneFormat = (code, number) => {
+  return `(+${code}) ${number.substr(0,3)} ${number.substr(3,3)} ${number.substr(6,4)}`;
 };

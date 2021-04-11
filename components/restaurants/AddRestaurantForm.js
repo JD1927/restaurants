@@ -1,4 +1,4 @@
-import { filter, map, size } from 'lodash';
+import { filter, isEmpty, map, size } from 'lodash';
 import React, { useEffect, useState } from 'react';
 import {
   Alert,
@@ -9,9 +9,11 @@ import {
 import CountryPicker from 'react-native-country-picker-modal';
 import { Avatar, Button, Icon, Image, Input } from 'react-native-elements';
 import MapView from 'react-native-maps';
+import { uploadImage, addDocumentWithoutID, getCurrentUser } from '../../utils/actions';
 import { ORANGE, ORANGE_50 } from '../../utils/global.colors';
-import { getCurrentLocation, getImageFromGallery } from '../../utils/helpers';
+import { getCurrentLocation, getImageFromGallery, hasValidEmail } from '../../utils/helpers';
 import Modal from '../Modal';
+import uuid from 'random-uuid-v4';
 
 const widthScreen = Dimensions.get('window').width;
 
@@ -26,8 +28,100 @@ export default function AddRestaurantForm({ toast, setLoading, navigation }) {
   const [hasMap, setHasMap] = useState(false);
   const [location, setLocation] = useState(undefined);
 
-  const addRestaurant = () => {
-    console.log('Add!!!!!!!');
+  const clearErrors = () => {
+    setNameError(undefined);
+    setEmailError(undefined);
+    setDescriptionError(undefined);
+    setPhoneError(undefined);
+    setAddressError(undefined);
+  };
+
+  const hasValidForm = () => {
+    clearErrors();
+    let isValid = true;
+
+    if (isEmpty(restaurantForm.name)) {
+      setNameError(`You must enter the restaurant's name.`);
+      isValid = false;
+    }
+    if (isEmpty(restaurantForm.email)) {
+      setEmailError(`You must enter the restaurant's email.`);
+      isValid = false;
+    }
+    if (!hasValidEmail(restaurantForm.email)) {
+      setEmailError(`You must enter a valid email.`);
+      isValid = false;
+    }
+    if (isEmpty(restaurantForm.address)) {
+      setAddressError(`You must enter the restaurant's address.`);
+      isValid = false;
+    }
+    if (size(restaurantForm.phone) < 10) {
+      setPhoneError(`You must enter a valid phone number.`);
+      isValid = false;
+    }
+    if (isEmpty(restaurantForm.description)) {
+      setDescriptionError(`You must enter the restaurant's description.`);
+      isValid = false;
+    }
+
+    if (!location) {
+      toast.current.show(`You must add the restaurant's location on the map.`, 3000);
+      isValid = false;
+    } else if (size(selectedImages) === 0) {
+      toast.current.show(`You must add at least one restaurant's image.`, 3000);
+      isValid = false;
+    }
+    return isValid;
+  };
+
+  const addRestaurant = async () => {
+    if (!hasValidForm()) {
+      return;
+    }
+    setLoading(true);
+    const uploadedImages = await uploadImages();
+    const { 
+      name, address, email, description, 
+      phoneCode, phone, country } = restaurantForm;
+    const user = getCurrentUser();
+    const data = {
+      name,
+      address,
+      email,
+      description,
+      phoneCode,
+      phone,
+      country,
+      location,
+      images: [ ...uploadedImages ],
+      rating: 0,
+      ratingTotal: 0,
+      quantityVoting: 0,
+      createdAt: new Date(),
+      createdBy: user.uid,
+    }
+    const res = await addDocumentWithoutID({ collection: 'restaurants', data });
+    if(!res.status) {
+      
+      toast.current.show('Something went wrong creating the restaurant.');
+    }
+    setLoading(false);
+    navigation.navigate('restaurants');
+  };
+
+  const uploadImages = async () => {
+    const images = [];
+
+    await Promise.all(
+      map(selectedImages, async (image) => {
+        const res = await uploadImage({image, path: 'restaurants', name: uuid()});
+        if (res.status) {
+          images.push(res.url);
+        }
+      })
+    );
+    return images;
   };
 
   return (
@@ -289,8 +383,8 @@ const defaultFormValues = () => {
     description: '',
     phone: '',
     address: '',
-    country: '',
-    phoneCode: '',
+    country: 'CO',
+    phoneCode: '57',
   };
 };
 

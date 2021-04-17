@@ -19,7 +19,7 @@ export default function CarouselImages({ images, width, height, activeSlide, set
     <View>
       <Carousel
         layout={'stack'} 
-        layoutCardOffset={`18`}
+        layoutCardOffset={18}
         data={images}
         sliderWidth={width}
         itemWidth={width}

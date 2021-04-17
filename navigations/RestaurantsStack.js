@@ -3,6 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Restaurants from '../screens/restaurants/Restaurants';
 import AddRestaurant from '../screens/restaurants/AddRestaurant';
 import Restaurant from '../screens/restaurants/Restaurant';
+import AddRestaurantReview from '../screens/restaurants/AddRestaurantReview';
 
 const Stack = createStackNavigator();
 
@@ -27,6 +28,18 @@ export default function RestaurantsStack() {
         options={
           {
             title: 'Add Restaurant',
+            headerTitleStyle: {
+              fontFamily: 'Poppins',
+            },
+          }
+        }>
+      </Stack.Screen>
+      <Stack.Screen
+        name='add-restaurant-review'
+        component={AddRestaurantReview}
+        options={
+          {
+            title: 'New Review',
             headerTitleStyle: {
               fontFamily: 'Poppins',
             },

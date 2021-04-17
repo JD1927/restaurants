@@ -193,3 +193,38 @@ export const getDocumentByID = async (collection, id) => {
   }
   return result;
 };
+export const updateDocument = async (collection, id, data) => {
+  const result = { status: true, error: undefined };
+  try {
+    await db.collection(collection).doc(id).update(data);
+  } catch (error) {
+    result.status = false;
+    result.error = error;
+  }
+  return result;
+};
+
+export const getRestaurantReviews = async (id) => {
+  const result = {
+    status: true,
+    error: undefined,
+    reviews: [],
+  };
+  try {
+    const response = await db
+      .collection('reviews')
+      // .orderBy('createdAt', 'desc')
+      .where('restaurantID', '==', id)
+      .get();
+
+    response.forEach((doc) => {
+      const review = doc.data();
+      review.id = doc.id;
+      result.reviews.push(review);
+    });
+  } catch (error) {
+    result.status = false;
+    result.error = error;
+  }
+  return result;
+};

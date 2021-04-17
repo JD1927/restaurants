@@ -1,7 +1,7 @@
 import { useFocusEffect } from '@react-navigation/native';
 import firebase from 'firebase/app';
 import { size } from 'lodash';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Icon } from 'react-native-elements';
 import Loading from '../../components/Loading';
@@ -34,11 +34,9 @@ export default function Restaurants({ navigation }) {
       getData();
     }, [])
   );
-  useEffect(() => {
-    firebase.auth().onAuthStateChanged((userInfo) => {
-      setUser(userInfo ? true : false);
-    });
-  }, []);
+  firebase.auth().onAuthStateChanged((userInfo) => {
+    setUser(userInfo ? true : false);
+  });
 
   const handleMoreRestaurants = async () => {
     if (!startRestaurant) {

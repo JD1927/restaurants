@@ -44,7 +44,7 @@ function Restaurant({ restaurant, navigation }) {
           <Text style={styles.info}>{address}</Text>
           <Text style={styles.info}>{getPhoneFormat(phoneCode, phone)}</Text>
           <Text style={styles.description}>
-            {size(description) > 60 ? `${description.substr(0, 60)}...` : description}
+            {size(description) > 60 ? `${description.substr(0, 50)}...` : description}
           </Text>
         </View>
       </View>
